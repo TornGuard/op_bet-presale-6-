@@ -1,0 +1,31 @@
+{
+  "entities": {
+    "Submission": {
+      "title": "Submission",
+      "description": "A presale submission containing a transaction hash and an OP20 address.",
+      "type": "object",
+      "properties": {
+        "txHash": {
+          "type": "string",
+          "description": "The transaction hash of the BTC payment."
+        },
+        "op20Address": {
+          "type": "string",
+          "description": "The OP20 address of the user."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the submission was created."
+        }
+      },
+      "required": ["txHash", "op20Address", "timestamp"]
+    }
+  },
+  "firestore": {
+    "submissions/{submissionId}": {
+      "schema": { "$ref": "#/entities/Submission" },
+      "description": "Stores all presale submissions."
+    }
+  }
+}

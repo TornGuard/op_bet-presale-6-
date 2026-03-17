@@ -1,0 +1,48 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: submissions
+    // Document ID: auto-generated
+    // Fields:
+    //   - txHash: string (required, min 10, max 100) - The transaction hash
+    //   - op20Address: string (required, min 10, max 100) - The OP20 address
+    //   - timestamp: string (required) - ISO 8601 date string
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    function hasOnlyAllowedFields(fields) {
+      return request.resource.data.keys().hasOnly(fields);
+    }
+
+    function isValidDateString(dateStr) {
+      return dateStr is string && dateStr.matches("^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.*Z?$");
+    }
+
+    function isValidSubmission(data) {
+      return hasOnlyAllowedFields(['txHash', 'op20Address', 'timestamp']) &&
+             data.txHash is string && data.txHash.size() >= 10 && data.txHash.size() <= 100 &&
+             data.op20Address is string && data.op20Address.size() >= 10 && data.op20Address.size() <= 100 &&
+             isValidDateString(data.timestamp);
+    }
+
+    match /submissions/{submissionId} {
+      // Allow read for everyone so they can see the total spots filled.
+      // Blockchain data (txHash, op20Address) is inherently public.
+      allow read: if true;
+      
+      // Allow create if data is valid
+      allow create: if isValidSubmission(request.resource.data);
+                    
+      // Submissions are immutable
+      allow update: if false; 
+      allow delete: if false; 
+    }
+  }
+}
