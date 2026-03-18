@@ -184,10 +184,10 @@ export default function App() {
                       { round: 4, price: 600 },
                       { round: 5, price: 800 },
                       { round: 6, price: 1000 },
-                      { round: 7, price: 1200 },
-                      { round: 8, price: 1400 },
-                      { round: 9, price: 1600 },
-                      { round: 10, price: 1800 }
+                      { round: 7, price: 1100 },
+                      { round: 8, price: 1200 },
+                      { round: 9, price: 1300 },
+                      { round: 10, price: 1400 }
                     ].map(({ round, price }) => (
                       <div key={round} className={`flex items-center justify-between p-2.5 rounded-lg border transition-colors ${
                         filledSpots >= round 
