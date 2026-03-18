@@ -15,7 +15,7 @@ export default function App() {
   const [txHash, setTxHash] = useState('');
   const [opAddress, setOpAddress] = useState('');
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [filledSpots, setFilledSpots] = useState(0);
+  const [filledSpots, setFilledSpots] = useState(1);
 
   useEffect(() => {
     const q = query(collection(db, 'submissions'));
@@ -160,8 +160,8 @@ export default function App() {
 
                   <div className="mb-4">
                     <div className="flex justify-between items-end mb-1">
-                      <span className="font-mono text-[10px] text-dim uppercase tracking-wider">Rounds Filled</span>
-                      <span className="font-mono text-xs font-bold text-accent">{filledSpots} / 10</span>
+                      <span className="font-mono text-[10px] text-dim uppercase tracking-wider">Presale Status</span>
+                      <span className="font-mono text-xs font-bold text-accent">{Math.round((filledSpots / 10) * 100)}% filled</span>
                     </div>
                     <div className="h-1.5 w-full bg-bg border border-border rounded-full overflow-hidden">
                       <motion.div 
@@ -193,7 +193,7 @@ export default function App() {
                       }`}>
                         <div className="flex items-center gap-2">
                           <span className="font-mono text-xs text-dim uppercase">Round {round}</span>
-                          {filledSpots >= round && <CheckCircle2 className="w-3 h-3 text-green" />}
+                          {filledSpots >= round && <span className="bg-green/20 text-green font-mono text-[10px] px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Active</span>}
                         </div>
                         <div className="flex items-center gap-3">
                           <span className="font-mono text-xs text-text font-bold">${price}</span>
