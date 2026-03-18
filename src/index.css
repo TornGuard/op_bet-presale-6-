@@ -28,19 +28,27 @@ body {
 /* Custom scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
+  margin-left: 8px;
 }
 
 ::-webkit-scrollbar-track {
   background: var(--color-bg3);
   border-radius: 4px;
+  margin-left: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-accent);
   border-radius: 4px;
   transition: background 0.2s;
+  margin-left: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #ffb84d;
+}
+
+/* Add padding to scrollable containers */
+.overflow-y-auto {
+  padding-right: 4px;
 }
