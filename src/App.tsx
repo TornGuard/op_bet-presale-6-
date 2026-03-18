@@ -11,6 +11,7 @@ import { db } from './firebase';
 
 export default function App() {
   const [showPresale, setShowPresale] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<'btc' | 'usdc'>('btc');
   const [copied, setCopied] = useState(false);
   const [txHash, setTxHash] = useState('');
   const [opAddress, setOpAddress] = useState('');
@@ -29,9 +30,11 @@ export default function App() {
   }, []);
 
   const btcAddress = "bc1ptexjwyn83gl0e5j5jlf89f4gtcfn4cqrrjlw8jrkkxtzjwcl8drq09k6h4";
+  const usdcAddress = "0x755EbFE16FFC822A0d46180b63B238f70e711ce3";
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(btcAddress);
+    const addressToCopy = paymentMethod === 'btc' ? btcAddress : usdcAddress;
+    navigator.clipboard.writeText(addressToCopy);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -203,11 +206,35 @@ export default function App() {
                     ))}
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label className="font-mono text-[10px] text-dim uppercase tracking-wider">Send BTC to</label>
+                  <div className="space-y-2">
+                    <div className="flex gap-2 mb-2">
+                      <button
+                        onClick={() => setPaymentMethod('btc')}
+                        className={`flex-1 font-mono text-xs uppercase tracking-wider px-3 py-2 rounded-lg transition-colors border ${
+                          paymentMethod === 'btc'
+                            ? 'bg-accent/20 border-accent text-accent'
+                            : 'bg-bg border-border text-dim hover:border-accent/50'
+                        }`}
+                      >
+                        BTC
+                      </button>
+                      <button
+                        onClick={() => setPaymentMethod('usdc')}
+                        className={`flex-1 font-mono text-xs uppercase tracking-wider px-3 py-2 rounded-lg transition-colors border ${
+                          paymentMethod === 'usdc'
+                            ? 'bg-accent/20 border-accent text-accent'
+                            : 'bg-bg border-border text-dim hover:border-accent/50'
+                        }`}
+                      >
+                        USDC (Mainnet)
+                      </button>
+                    </div>
+                    <label className="font-mono text-[10px] text-dim uppercase tracking-wider">
+                      Send {paymentMethod === 'btc' ? 'BTC' : 'USDC'} to
+                    </label>
                     <div className="flex items-center gap-2">
                       <code className="flex-1 bg-bg border border-border rounded-lg p-2 font-mono text-xs text-accent break-all">
-                        {btcAddress}
+                        {paymentMethod === 'btc' ? btcAddress : usdcAddress}
                       </code>
                       <button 
                         onClick={handleCopy}
