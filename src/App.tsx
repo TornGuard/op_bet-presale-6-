@@ -151,7 +151,7 @@ export default function App() {
                   <h2 className="font-mono font-bold text-xl text-text mb-1 uppercase tracking-wide">Strategic Presale</h2>
                   <p className="text-dim text-sm leading-relaxed">
                     10 rounds of presale, each grants 1% of supply. <br/>
-                    <strong className="text-accent font-mono text-base mt-1 inline-block">Presale • 10% of supply</strong>
+                    <strong className="text-accent font-mono text-base mt-1 inline-block">Presale • 10% of the supply</strong>
                   </p>
                 </div>
 
