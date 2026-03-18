@@ -145,7 +145,7 @@ export default function App() {
 
               <div className="space-y-4">
                 <div>
-                  <h2 className="font-mono font-bold text-xl text-text mb-1 uppercase tracking-wide">Initial Dev Funding</h2>
+                  <h2 className="font-mono font-bold text-xl text-text mb-1 uppercase tracking-wide">Strategic Presale</h2>
                   <p className="text-dim text-sm leading-relaxed">
                     10 rounds of presale, each grants 1% of supply. <br/>
                     <strong className="text-accent font-mono text-base mt-1 inline-block">$9,100 total • 10% of supply</strong>
