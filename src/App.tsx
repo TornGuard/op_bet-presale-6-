@@ -147,20 +147,20 @@ export default function App() {
                 <div>
                   <h2 className="font-mono font-bold text-xl text-text mb-1 uppercase tracking-wide">Initial Dev Funding</h2>
                   <p className="text-dim text-sm leading-relaxed">
-                    We are doing a small presale to fund initial development. <br/>
-                    <strong className="text-accent font-mono text-base mt-1 inline-block">1K for 1%</strong>
+                    10 rounds of presale, each grants 1% of supply. <br/>
+                    <strong className="text-accent font-mono text-base mt-1 inline-block">$9,100 total • 10% of supply</strong>
                   </p>
                 </div>
 
                 <div className="bg-bg3 border border-border rounded-xl p-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="font-mono text-xs text-dim uppercase tracking-wider">Round Details</span>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="font-mono text-xs text-dim uppercase tracking-wider">Presale Rounds</span>
                     <span className="bg-green/10 text-green font-mono text-[10px] px-2 py-0.5 rounded uppercase font-bold tracking-wider">Live</span>
                   </div>
 
-                  <div className="mb-3">
+                  <div className="mb-4">
                     <div className="flex justify-between items-end mb-1">
-                      <span className="font-mono text-[10px] text-dim uppercase tracking-wider">Spots Filled</span>
+                      <span className="font-mono text-[10px] text-dim uppercase tracking-wider">Rounds Filled</span>
                       <span className="font-mono text-xs font-bold text-accent">{filledSpots} / 10</span>
                     </div>
                     <div className="h-1.5 w-full bg-bg border border-border rounded-full overflow-hidden">
@@ -172,16 +172,35 @@ export default function App() {
                       />
                     </div>
                   </div>
-                  
-                  <div className="grid grid-cols-2 gap-3 mb-4">
-                    <div className="bg-bg border border-border rounded-lg p-2 text-center">
-                      <div className="text-dim text-[10px] font-mono uppercase mb-0.5">Price per spot</div>
-                      <div className="text-text font-mono font-bold text-lg">$100</div>
-                    </div>
-                    <div className="bg-bg border border-border rounded-lg p-2 text-center">
-                      <div className="text-dim text-[10px] font-mono uppercase mb-0.5">Total Spots</div>
-                      <div className="text-text font-mono font-bold text-lg">10</div>
-                    </div>
+
+                  <div className="space-y-2 mb-4 max-h-64 overflow-y-auto">
+                    {[
+                      { round: 1, price: 100 },
+                      { round: 2, price: 200 },
+                      { round: 3, price: 400 },
+                      { round: 4, price: 600 },
+                      { round: 5, price: 800 },
+                      { round: 6, price: 1000 },
+                      { round: 7, price: 1200 },
+                      { round: 8, price: 1400 },
+                      { round: 9, price: 1600 },
+                      { round: 10, price: 1800 }
+                    ].map(({ round, price }) => (
+                      <div key={round} className={`flex items-center justify-between p-2.5 rounded-lg border transition-colors ${
+                        filledSpots >= round 
+                          ? 'bg-green/10 border-green/30' 
+                          : 'bg-bg border-border hover:border-accent/50'
+                      }`}>
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono text-xs text-dim uppercase">Round {round}</span>
+                          {filledSpots >= round && <CheckCircle2 className="w-3 h-3 text-green" />}
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="font-mono text-xs text-text font-bold">${price}</span>
+                          <span className="font-mono text-[10px] text-dim">1%</span>
+                        </div>
+                      </div>
+                    ))}
                   </div>
 
                   <div className="space-y-1.5">
