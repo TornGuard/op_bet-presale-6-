@@ -226,7 +226,7 @@ export default function App() {
                             : 'bg-bg border-border text-dim hover:border-accent/50'
                         }`}
                       >
-                        USDC
+                        USDC (All EVM)
                       </button>
                     </div>
                     <label className="font-mono text-[10px] text-dim uppercase tracking-wider">
