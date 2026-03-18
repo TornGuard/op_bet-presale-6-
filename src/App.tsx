@@ -216,7 +216,10 @@ export default function App() {
                             : 'bg-bg border-border text-dim hover:border-accent/50'
                         }`}
                       >
-                        BTC
+                        <span className="flex items-center justify-center gap-1.5">
+                          <img src="/bitcoin-btc-logo.png" alt="BTC" className="w-4 h-4" />
+                          BTC
+                        </span>
                       </button>
                       <button
                         onClick={() => setPaymentMethod('usdc')}
@@ -226,7 +229,10 @@ export default function App() {
                             : 'bg-bg border-border text-dim hover:border-accent/50'
                         }`}
                       >
-                        USDC (All EVM)
+                        <span className="flex items-center justify-center gap-1.5">
+                          <img src="/usd-coin-usdc-logo.png" alt="USDC" className="w-4 h-4" />
+                          USDC (All EVM)
+                        </span>
                       </button>
                     </div>
                     <label className="font-mono text-[10px] text-dim uppercase tracking-wider">
