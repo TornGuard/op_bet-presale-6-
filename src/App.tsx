@@ -161,16 +161,24 @@ export default function App() {
                     <span className="bg-green/10 text-green font-mono text-[10px] px-2 py-0.5 rounded uppercase font-bold tracking-wider">Live</span>
                   </div>
 
+                  {(() => {
+                    const ROUND_SIZE = 10;
+                    const completedRounds = Math.floor(filledSpots / ROUND_SIZE);
+                    const currentRound = Math.min(completedRounds + 1, 10);
+                    const roundProgress = (filledSpots % ROUND_SIZE) / ROUND_SIZE * 100;
+
+                    return (
+                      <>
                   <div className="mb-4">
                     <div className="flex justify-between items-end mb-1">
-                      <span className="font-mono text-[10px] text-dim uppercase tracking-wider">Presale Status</span>
-                      <span className="font-mono text-xs font-bold text-accent">{Math.round((filledSpots / 10) * 100)}% filled</span>
+                      <span className="font-mono text-[10px] text-dim uppercase tracking-wider">Round {currentRound} Progress</span>
+                      <span className="font-mono text-xs font-bold text-accent">{Math.round(roundProgress)}% filled</span>
                     </div>
                     <div className="h-1.5 w-full bg-bg border border-border rounded-full overflow-hidden">
-                      <motion.div 
+                      <motion.div
                         className="h-full bg-accent"
                         initial={{ width: 0 }}
-                        animate={{ width: `${Math.min((filledSpots / 10) * 100, 100)}%` }}
+                        animate={{ width: `${roundProgress}%` }}
                         transition={{ duration: 0.5, ease: "easeOut" }}
                       />
                     </div>
@@ -190,16 +198,16 @@ export default function App() {
                       { round: 10, price: 1400 }
                     ].map(({ round, price }) => (
                       <div key={round} className={`flex items-center justify-between p-2.5 rounded-lg border transition-colors ${
-                        round < filledSpots
+                        round < currentRound
                           ? 'bg-bg border-border opacity-50'
-                          : round === filledSpots
+                          : round === currentRound
                           ? 'bg-green/10 border-green/30'
                           : 'bg-bg border-border hover:border-accent/50'
                       }`}>
                         <div className="flex items-center gap-2">
                           <span className="font-mono text-xs text-dim uppercase">Round {round}</span>
-                          {round < filledSpots && <span className="bg-border text-dim font-mono text-[10px] px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Filled</span>}
-                          {round === filledSpots && <span className="bg-green/20 text-green font-mono text-[10px] px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Active</span>}
+                          {round < currentRound && <span className="bg-border text-dim font-mono text-[10px] px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Filled</span>}
+                          {round === currentRound && <span className="bg-green/20 text-green font-mono text-[10px] px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Active</span>}
                         </div>
                         <div className="flex items-center gap-3">
                           <span className="font-mono text-xs text-text font-bold">${price}</span>
@@ -208,6 +216,9 @@ export default function App() {
                       </div>
                     ))}
                   </div>
+                      </>
+                    );
+                  })()}
 
                   <div className="space-y-2">
                     <div className="flex gap-2 mb-2">
