@@ -190,13 +190,16 @@ export default function App() {
                       { round: 10, price: 1400 }
                     ].map(({ round, price }) => (
                       <div key={round} className={`flex items-center justify-between p-2.5 rounded-lg border transition-colors ${
-                        filledSpots >= round 
-                          ? 'bg-green/10 border-green/30' 
+                        round < filledSpots
+                          ? 'bg-bg border-border opacity-50'
+                          : round === filledSpots
+                          ? 'bg-green/10 border-green/30'
                           : 'bg-bg border-border hover:border-accent/50'
                       }`}>
                         <div className="flex items-center gap-2">
                           <span className="font-mono text-xs text-dim uppercase">Round {round}</span>
-                          {filledSpots >= round && <span className="bg-green/20 text-green font-mono text-[10px] px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Active</span>}
+                          {round < filledSpots && <span className="bg-border text-dim font-mono text-[10px] px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Filled</span>}
+                          {round === filledSpots && <span className="bg-green/20 text-green font-mono text-[10px] px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Active</span>}
                         </div>
                         <div className="flex items-center gap-3">
                           <span className="font-mono text-xs text-text font-bold">${price}</span>
